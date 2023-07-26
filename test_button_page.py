@@ -1,7 +1,7 @@
 import pytest
 from selenium import webdriver
 
-from button_page import ButtonPage
+from pages.button_page import ButtonPage
 
 
 # using function scope for fixtures because the page needs to be reloaded for each test

@@ -1,5 +1,7 @@
 import pytest
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+
 from pages.button_page import ButtonPage
 
 
@@ -16,13 +18,9 @@ def url():
     return 'https://eviltester.github.io/synchole/buttons.html'
 
 
-# @pytest.fixture()
-# def button_page(driver):
-#     return ButtonPage(driver)
-
-
-def test_easy_to_sync_buttons(driver, url):  #, button_page):
+def test_easy_to_sync_buttons(driver, url):
     driver.get(url)
-   # button_page.easy_button0.click()
+    button_page = ButtonPage(driver)
+    
 
 

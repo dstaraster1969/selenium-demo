@@ -5,8 +5,9 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class ButtonPage:
-    def __init__(self, wait):
-        self.wait = wait
+    def __init__(self, driver):
+        self.driver = driver
+        self.wait = WebDriverWait(driver, 10)
 
     # easy_button_00 = (By.ID, 'easy00')
     def click_easy_button_00(self):
@@ -21,4 +22,5 @@ class ButtonPage:
     def click_easy_button_03(self):
         self.wait.until(EC.element_to_be_clickable((By.ID, 'easy03'))).click()
 
-    easy_button_message = (By.ID, 'easybuttonmessage')
+    def easy_button_message_text(self):
+        return self.driver.find_element(By.ID, 'easybuttonmessage').text

@@ -16,9 +16,8 @@ def driver():
 
 def test_easy_buttons(driver):
     driver.get('https://eviltester.github.io/synchole/buttons.html')
-    wait = WebDriverWait(driver, 10)
 
-    button_page = ButtonPage(wait)
+    button_page = ButtonPage(driver)
 
     #wait.until(EC.element_to_be_clickable(button_page.easy_button_00)).click()
     button_page.click_easy_button_00()
@@ -29,5 +28,4 @@ def test_easy_buttons(driver):
     # wait.until(EC.element_to_be_clickable(button_page.easy_button_02)).click()
     # wait.until(EC.element_to_be_clickable(button_page.easy_button_03)).click()
 
-    message_text = driver.find_element(By.ID, 'easybuttonmessage').text
-    assert message_text == 'All Buttons Clicked'
+    assert button_page.easy_button_message_text() == 'All Buttons Clicked'

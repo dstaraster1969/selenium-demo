@@ -3,6 +3,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 
+# ButtonPage class abstracts out all the actions that can be performed
+# on this page
 class ButtonPage:
     def __init__(self, driver):
         self.driver = driver

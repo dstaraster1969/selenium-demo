@@ -4,7 +4,9 @@ from selenium import webdriver
 from button_page import ButtonPage
 
 
-@pytest.fixture(scope='class')
+# using function scope for fixtures because the page needs to be reloaded for each test
+# (that resets everything
+@pytest.fixture
 def driver():
     driver = webdriver.Chrome()
     driver.get('https://eviltester.github.io/synchole/buttons.html')
@@ -12,11 +14,14 @@ def driver():
     driver.close()
 
 
-@pytest.fixture(scope='class')
+@pytest.fixture
 def button_page(driver):
     return ButtonPage(driver)
 
 
+# the first time I tested against this page, the easy buttons came up immediately
+# since then, there's been delays added, so only including here for completeness,
+# but the two test are basically identical
 def test_easy_buttons(driver, button_page):
     button_page.click_easy_button_00()
     button_page.click_easy_button_01()

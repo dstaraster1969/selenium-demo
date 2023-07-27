@@ -22,7 +22,7 @@ def button_page(driver):
 # the first time I tested against this page, the easy buttons came up immediately
 # since then, there's been delays added, so only including here for completeness,
 # but the two test are basically identical
-def test_easy_buttons(driver, button_page):
+def test_easy_buttons(button_page):
     button_page.click_easy_button_00()
     button_page.click_easy_button_01()
     button_page.click_easy_button_02()
@@ -31,7 +31,7 @@ def test_easy_buttons(driver, button_page):
     assert button_page.easy_button_message_text() == 'All Buttons Clicked'
 
 
-def test_hard_buttons(driver, button_page):
+def test_hard_buttons(button_page):
     button_page.click_hard_button_00()
     button_page.click_hard_button_01()
     button_page.click_hard_button_02()

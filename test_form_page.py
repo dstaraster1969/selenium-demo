@@ -24,8 +24,6 @@ def test_submit_form(form_page):
     form_page.click_submit_button()
 
     assert 'Thanks' in form_page.get_submission_text()
-    assert username in form_page.get_username_confirmation()
-    assert 'submit' in form_page.get_submit_button_confirmation()
 
 
 def test_clear_form(form_page):

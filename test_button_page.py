@@ -60,4 +60,3 @@ def test_click_existing_hard_buttons(button_page):
     hard_buttons = button_page.get_all_enabled_hard_buttons()
 
     assert len(hard_buttons) == 2
-    

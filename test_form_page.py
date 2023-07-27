@@ -1,4 +1,5 @@
 import pytest
+from _pytest.outcomes import fail
 from selenium import webdriver
 
 from pages.form_page import FormPage
@@ -23,7 +24,7 @@ def test_submit_form(form_page):
     form_page.enter_username(username)
     form_page.click_submit_button()
 
-    assert 'Thanks' in form_page.get_submission_text()
+    assert form_page.get_submission_text() == 'Thanks For Your Submission'
 
 
 def test_clear_form(form_page):
@@ -50,3 +51,32 @@ def test_submit_confirmation(form_page):
     confirmation = form_page.get_submit_button_confirmation()
     assert 'submit' in confirmation
 
+
+def test_empty_username(form_page):
+    # expectation is that submitting an empty username fails
+    # this test fails
+    form_page.click_submit_button()
+    header = form_page.get_header_text()
+
+    assert header == 'Form to Submit'
+
+
+def test_too_long_username(form_page):
+    # entering a really long username should display an error on the main page
+    # trial and error shows that 8140 is the max chars for username
+    form_page.enter_username('x' * 8141)
+    # due to a bug where it goes to a default error page, header might not be on page
+    try:
+        form_page.click_submit_button()
+        header = form_page.get_header_text()
+        assert header == 'Form to Submit'
+    except:
+        assert fail()
+
+
+def test_max_chars_username(form_page):
+    form_page.enter_username('x' * 8140)
+    form_page.click_submit_button()
+    header = form_page.get_header_text()
+
+    assert 'Thanks For Your Submission' == header

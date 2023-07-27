@@ -42,3 +42,16 @@ class ButtonPage:
     def hard_button_message_text(self):
         return self.driver.find_element(By.ID, 'buttonmessage').text
 
+    def get_all_easy_buttons(self):
+        return self.driver.find_element(By.ID, 'easybuttons').find_elements(By.TAG_NAME, 'button')
+
+    def get_all_enabled_hard_buttons(self):
+        hard_buttons = self.driver.find_element(By.ID, 'buttons').find_elements(By.TAG_NAME, 'button')
+        enabled_buttons = []
+        for b in hard_buttons:
+            if b.is_enabled():
+                enabled_buttons.append(b)
+
+        return enabled_buttons
+
+

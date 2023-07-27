@@ -1,5 +1,3 @@
-from asyncio import sleep
-
 import pytest
 from selenium import webdriver
 
@@ -45,3 +43,12 @@ def test_username_confirmation(form_page):
 
     confirmation = form_page.get_username_confirmation()
     assert f'{first_name}+{last_name}' in confirmation
+
+
+def test_submit_confirmation(form_page):
+    form_page.enter_username('Rupert Giles')
+    form_page.click_submit_button()
+
+    confirmation = form_page.get_submit_button_confirmation()
+    assert 'submit' in confirmation
+

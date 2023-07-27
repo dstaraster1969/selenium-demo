@@ -3,6 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
+# FormPage abstracts out the actions that can occur on the form page
 class FormPage:
     def __init__(self, driver):
         self.driver = driver
@@ -33,5 +34,7 @@ class FormPage:
         return self.driver.find_element(By.CSS_SELECTOR, '[data-name=username]').text
 
     def get_submit_button_confirmation(self):
-        return self.driver.find_element(By.CSS_SELECTOR, '[data-name=submitbutton').text
+        self.wait.until(
+            EC.text_to_be_present_in_element((By.CSS_SELECTOR, '[data-name=submitbutton]'), 'submit'))
 
+        return self.driver.find_element(By.CSS_SELECTOR, '[data-name=submitbutton]').text
